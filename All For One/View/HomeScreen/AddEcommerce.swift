@@ -1,5 +1,5 @@
 //
-//  AddStore.swift
+//  AddEcommerce.swift
 //  All For One
 //
 //  Created by Luiz Pedro Franciscatto Guerra on 17/10/20.
@@ -7,31 +7,28 @@
 
 import SwiftUI
 
-struct AddStore: View {
+struct AddEcommerce: View {
     @Binding var sheetIsPresented: Bool
-    @State private var storeName: String = ""
-    @State private var login: String = ""
-    @State private var password: String = ""
+    @State private var ecommerceName: String = ""
+    
+    @ObservedObject var viewModel: HomeViewModel
+    
     var body: some View {
         NavigationView {
             Form {
-                Section(header: Text("Store Name")) {
+                Section(header: Text("E-commerce Name")) {
                     VStack {
-                        TextField("e.g. Amazon", text: $storeName)
+                        TextField("e.g. Amazon", text: $ecommerceName)
                     }
-                }
-                Section(header: Text("Login Information")) {
-                    TextField("Login", text: $login)
-                    SecureField("Password", text: $password)
                 }
                 Section {
                     Button(action: {
-                        performLogin()
+                        addEcommerce()
                         sheetIsPresented.toggle()
                     }, label: {
                         HStack {
                             Spacer()
-                            Text("Login")
+                            Text("Add")
                             Spacer()
                         }
                     })
@@ -46,18 +43,18 @@ struct AddStore: View {
                         }
                     })
                 }
-            }.navigationTitle("Add a new store")
+            }.navigationTitle("Add a new E-commerce")
         }
     }
     
-    func performLogin() {
-        
+    func addEcommerce() {
+        viewModel.addEcommerce(name: ecommerceName)
     }
 }
 
 struct AddStore_Previews: PreviewProvider {
     @State private static var sheetStatus = true
     static var previews: some View {
-        AddStore(sheetIsPresented: $sheetStatus)
+        AddEcommerce(sheetIsPresented: $sheetStatus, viewModel: HomeViewModel())
     }
 }
