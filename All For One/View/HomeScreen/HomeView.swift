@@ -22,14 +22,12 @@ struct HomeView: View {
                         EcommerceCard(ecommerce: ecommerce)
                             .clipped()
                             .cornerRadius(10)
-                            .padding(.horizontal, 20)
                             .padding(.vertical, 4)
                             .shadow(radius: 4)
                     }.onDelete{ (indexSet) in
                         viewModel.deleteEcommerce(at: indexSet)
                     }
-                }
-                .navigationTitle("All For One")
+                }.navigationTitle("All For One")
                 .navigationViewStyle(StackNavigationViewStyle())
                 .navigationBarItems(
                     leading: Button(action: {
@@ -49,6 +47,7 @@ struct HomeView: View {
         }.sheet(isPresented: $addEcommerce, content: {
             AddEcommerce(sheetIsPresented: $addEcommerce, viewModel: self.viewModel)
         })
+        
     }
 }
 

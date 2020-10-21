@@ -45,7 +45,6 @@ class HomeViewModel: ObservableObject {
                 errorMessage = "E-commerce já cadastrado!"
                 isErrorShown = true
                 return
-
             }
         }
         
@@ -56,7 +55,8 @@ class HomeViewModel: ObservableObject {
     
     func deleteEcommerce(at indexSet: IndexSet) {
         ecommerceList.remove(atOffsets: indexSet)
-        // TODO -> Salvar quando deleta
+        saveEcommerces = ecommerceList.map { $0.id }
+        UserDefaults.standard.set(saveEcommerces, forKey: USER_DEFAULTS_ECOMMERCES_KEY)
     }
     
 }
