@@ -1,0 +1,12 @@
+US1 - Login One for All
+
+Eu como usuario não autenticado
+Gostaria de logar no sistema 
+Para cadastrar meus e-commerces
+
+Detalhes da implementação:
+xxxxxx
+
+Critérios de aceite:
+xxxxxx
+
