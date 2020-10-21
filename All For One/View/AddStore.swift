@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct AddStore: View {
-    @Binding var sheetIsPresented: Bool
+    @Binding var presentedSheet: Bool
     @State private var storeName: String = ""
     @State private var login: String = ""
     @State private var password: String = ""
@@ -27,7 +27,7 @@ struct AddStore: View {
                 Section {
                     Button(action: {
                         performLogin()
-                        sheetIsPresented.toggle()
+                        presentedSheet.toggle()
                     }, label: {
                         HStack {
                             Spacer()
@@ -36,7 +36,7 @@ struct AddStore: View {
                         }
                     })
                     Button(action: {
-                        sheetIsPresented.toggle()
+                        presentedSheet.toggle()
                     }, label: {
                         HStack {
                             Spacer()
@@ -58,6 +58,6 @@ struct AddStore: View {
 struct AddStore_Previews: PreviewProvider {
     @State private static var sheetStatus = true
     static var previews: some View {
-        AddStore(sheetIsPresented: $sheetStatus)
+        AddStore(presentedSheet: $sheetStatus)
     }
 }
