@@ -8,10 +8,14 @@
 import SwiftUI
 
 struct SelectReport: View {
+    
+    
     @State private var storeSelection = ""
     @State private var dateSelection = Date()
     @State private var statusSelection = "In time"
-    private let list = ["Amazon", "Aliexpress", "Nike"]
+    
+    @ObservedObject var viewModel = HomeViewModel()
+    
     var body: some View {
         NavigationView {
             Form {
@@ -28,8 +32,10 @@ struct SelectReport: View {
                 }
                 Section(header: Text("Filtered per ecommerce")) {
                     Picker("Select a store", selection: $storeSelection) {
-                        List(list, id: \.self) { store in
-                            Text(store)
+                        List {
+                            ForEach(viewModel.ecommerceList, id: \.id) { ecommerce in
+                                Text(ecommerce.name)
+                            }
                         }
                     }
                     if !storeSelection.isEmpty {
