@@ -7,6 +7,10 @@
 
 import SwiftUI
 
+enum SheetView {
+    case addStore, refreshStores, orderReports, none
+}
+
 struct ContentView: View {
     let array = [
         OrderExample(name: "Gray Shirt", status: .shipped, quantity: 2, fromStore: "Amazon", productImageName: "shirt", storeImageName: "amazon"),
@@ -15,7 +19,10 @@ struct ContentView: View {
         OrderExample(name: "Gray Shirt", status: .shipped, quantity: 2, fromStore: "Amazon", productImageName: "shirt", storeImageName: "amazon"),
         OrderExample(name: "Gray Shirt", status: .shipped, quantity: 2, fromStore: "Amazon", productImageName: "shirt", storeImageName: "amazon")
     ]
-    @State private var addEcommerce = false
+    let connectedStores = ["aliexpress", "amazon", "nike"]
+    
+    @State private var sheetIsDisplayed = false
+    @State private var sheetState = SheetView.none
     @State private var refreshRotation = false
     
     var body: some View {
@@ -32,31 +39,54 @@ struct ContentView: View {
                     }
                 }
                 .navigationTitle("All For One")
-                .navigationViewStyle(StackNavigationViewStyle())
                 .navigationBarItems(
                     leading: Button(action: {
-                        addEcommerce.toggle()
+                        sheetState = .addStore
+                        sheetIsDisplayed = true
                     }, label: {
                         Image(systemName: "plus")
                             .accentColor(.black)
                     }),
-                    trailing: Button(action: {
-                        withAnimation(.easeOut) {
-                            refreshRotation.toggle()
+                    trailing:
+                        HStack {
+                            Button(action: {
+                                sheetState = .orderReports
+                                sheetIsDisplayed = true
+                            }, label: {
+                                Image("report")
+                                    .resizable()
+                                    .scaledToFit()
+                                    .frame(width: 20, height: 20, alignment: .center)
+                                    .padding(8)
+                            })
+                            Image("update-arrow")
+                                .resizable()
+                                .frame(width: 20, height: 20, alignment: .center)
+                                .accentColor(.black)
+                                .rotationEffect(Angle.degrees(refreshRotation ? 360 : .zero))
+                                .animation(.easeOut)
+                            .onTapGesture {
+                                refreshRotation.toggle()
+                            }
+                            .onLongPressGesture(minimumDuration: 0.05) {
+                                sheetState = .refreshStores
+                                sheetIsDisplayed = true
+                            }
                         }
-                    }, label: {
-                        Image("update-arrow")
-                            .resizable()
-                            .frame(width: 20, height: 20, alignment: .center)
-                            .accentColor(.black)
-                            .rotationEffect(Angle.degrees(refreshRotation ? 360 : .zero))
-                            .animation(.easeOut)
-                        
-                    }))
+                )
             }
-        }.sheet(isPresented: $addEcommerce, content: {
-            AddStore(sheetIsPresented: $addEcommerce)
-        })
+        }.sheet(isPresented: $sheetIsDisplayed) {
+            switch sheetState {
+            case .addStore:
+                AddStore(presentedSheet: $sheetIsDisplayed)
+            case .refreshStores:
+                UpdateStoreData(isSheetUp: $sheetIsDisplayed, connectedStores: connectedStores)
+            case .orderReports:
+                SelectReport()
+            case .none:
+                Text("Oops. You shouldn't be here!")
+            }
+        }
     }
 }
 
