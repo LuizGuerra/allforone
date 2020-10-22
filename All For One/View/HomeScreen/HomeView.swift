@@ -24,15 +24,12 @@ struct HomeView: View {
                     ForEach(viewModel.ecommerceList, id: \.id) { ecommerce in
                         NavigationLink(destination: OrdersView(viewModel: OrdersViewModel(orders: ecommerce.orders))) {
                             EcommerceCard(ecommerce: ecommerce)
-                                .clipped()
-                                .cornerRadius(10)
-                                .padding(.vertical, 4)
-                                .shadow(radius: 4)
                         }
                     }.onDelete{ (indexSet) in
                         viewModel.deleteEcommerce(at: indexSet)
                     }
-                }.navigationTitle("All For One")
+                }
+                .navigationTitle("All For One")
                 .navigationViewStyle(StackNavigationViewStyle())
                 .navigationBarItems(
                     leading: Button(action: {
@@ -53,11 +50,9 @@ struct HomeView: View {
                             .padding(8)
                     })
                 )
-                
                 .alert(isPresented: $viewModel.isErrorShown, content: { () -> Alert in
                     Alert(title: Text("Error"), message: Text(viewModel.errorMessage))
                 })
-                
                 .onAppear {
                     self.viewModel.fetchEcommerces()
                 }

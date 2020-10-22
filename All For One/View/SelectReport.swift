@@ -8,11 +8,10 @@
 import SwiftUI
 
 struct SelectReport: View {
-    
-    
     @State private var storeSelection = ""
     @State private var dateSelection = Date()
     @State private var statusSelection = "In time"
+    @State private var reportSheet = false
     
     @ObservedObject var viewModel = HomeViewModel()
     
@@ -20,15 +19,10 @@ struct SelectReport: View {
         NavigationView {
             Form {
                 Section(header: Text("All orders")) {
-                    HStack {
-                        Spacer()
-                        Button(action: {
-                            
-                        }, label: {
+                    NavigationLink(destination: ReportSheetView(orders: allOrders()), label: {
                             Text("Generate")
-                        })
-                        Spacer()
-                    }
+                        }
+                    )
                 }
                 Section(header: Text("Filtered per ecommerce")) {
                     Picker("Select a store", selection: $storeSelection) {
@@ -39,40 +33,25 @@ struct SelectReport: View {
                         }
                     }
                     if !storeSelection.isEmpty {
-                        HStack {
-                            Spacer()
-                            Button(action: {
-                                
-                            }, label: {
+                        NavigationLink(destination: ReportSheetView(orders: ordersFrom(store: storeSelection)), label: {
                                 Text("Select")
-                            })
-                            Spacer()
-                        }
+                            }
+                        )
                     }
-                }
+                }.disabled(viewModel.ecommerceList.count == 0)
                 Section(header: Text("Filtered per date")) {
                     DatePicker("Select a date", selection: $dateSelection,
                                in: ...Date(), displayedComponents: .date)
-                    HStack {
-                        Spacer()
-                        Button(action: {
-                            
-                        }, label: {
-                            Text("Select")
-                        })
-                        Spacer()
-                    }
+                    NavigationLink(destination: ReportSheetView(orders: filterOrdersByDate()), label: {
+                            Text("Generate")
+                        }
+                    )
                 }
                 Section(header: Text("Filtered per agility")) {
-                    HStack {
-                        Spacer()
-                        Button(action: {
-                            
-                        }, label: {
+                    NavigationLink(destination: ReportSheetView(orders: orderByAgility()), label: {
                             Text("Generate")
-                        })
-                        Spacer()
-                    }
+                        }
+                    )
                 }
                 Section(header: Text("Delivery status")) {
                     Picker("Select a store", selection: $statusSelection) {
@@ -80,18 +59,31 @@ struct SelectReport: View {
                             Text(status)
                         }
                     }.pickerStyle(SegmentedPickerStyle())
-                    HStack {
-                        Spacer()
-                        Button(action: {
-                            
-                        }, label: {
+                    NavigationLink(destination: ReportSheetView(orders: statusSelection == "In time" ? orderByAgility() : orderByAgility(inTime: false)), label: {
                             Text("Generate")
-                        })
-                        Spacer()
-                    }
+                        }
+                    )
                 }
             }.navigationTitle("Order report")
         }
+    }
+    
+    fileprivate func allOrders() -> [Order] {
+        var orders = [Order]()
+        viewModel.ecommerceList.forEach { orders.append(contentsOf: $0.orders) }
+        return orders
+    }
+    
+    fileprivate func ordersFrom(store name: String) -> [Order] {
+        return viewModel.ecommerceList.first(where: { $0.name == name })?.orders ?? []
+    }
+    
+    fileprivate func filterOrdersByDate() -> [Order] {
+        return allOrders().filter{ $0.deliveryDate > dateSelection }
+    }
+    
+    fileprivate func orderByAgility(inTime: Bool = true) -> [Order] {
+        return allOrders().filter { $0.completeDeadline && inTime }
     }
 }
 

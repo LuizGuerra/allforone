@@ -12,19 +12,14 @@ struct EcommerceCard: View {
     
     var body: some View {
         let width = UIScreen.main.bounds.width*0.25
-        return HStack(alignment: .top) {
-            VStack(alignment: .leading) {
-                Text(ecommerce.name)
-                    .font(.title)
-                    .padding(.bottom, 8)
-                Text("Pedidos: \(ecommerce.orders.count)")
-            }
-            Spacer()
+        return HStack(alignment: .center) {
             Image(ecommerce.imageURL)
                 .resizable()
                 .aspectRatio(contentMode: .fit)
                 .frame(width: width, height: width*0.5, alignment: .center)
-                .padding()
+                .padding(.horizontal)
+                .padding(.vertical, 8)
+            Text("Pedidos: \(ecommerce.orders.count)")
         }.padding(4)
         .background(Color.white)
     }
@@ -32,7 +27,7 @@ struct EcommerceCard: View {
 
 struct EcommerceCard_Previews: PreviewProvider {
     static var previews: some View {
-        EcommerceCard(ecommerce: Ecommerce(id: 0, name: "Amazon", imageURL: "shirt", orders: []))
+        EcommerceCard(ecommerce: Ecommerce(id: 0, name: "Amazon", imageURL: "amazon", orders: []))
     }
 }
 

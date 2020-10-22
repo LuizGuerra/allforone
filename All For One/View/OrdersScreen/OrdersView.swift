@@ -8,18 +8,13 @@
 import SwiftUI
 
 struct OrdersView: View {
-    
-    @ObservedObject var viewModel = OrdersViewModel()
+    @ObservedObject var viewModel: OrdersViewModel
     
     var body: some View {
-        VStack {
+        return VStack {
             List {
                 ForEach(viewModel.orders, id: \.id) { order in
                     OrderItemCard(order: order)
-                        .clipped()
-                        .cornerRadius(10)
-                        .padding(.vertical, 4)
-                        .shadow(radius: 4)
                 }
             }.navigationTitle("Orders")
             .navigationViewStyle(StackNavigationViewStyle())
@@ -27,8 +22,14 @@ struct OrdersView: View {
     }
 }
 
-struct OrdersView_Previews: PreviewProvider {
+struct HomeView_Previews2: PreviewProvider {
     static var previews: some View {
-        OrdersView()
+        HomeView()
     }
 }
+
+//struct OrdersView_Previews: PreviewProvider {
+//    static var previews: some View {
+//        OrdersView
+//    }
+//}
