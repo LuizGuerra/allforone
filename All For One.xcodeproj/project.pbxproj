@@ -7,7 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		0436F87525413D4800284521 /* AllOrdersReport.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0436F87425413D4800284521 /* AllOrdersReport.swift */; };
 		0436F87825413EC500284521 /* ReportSheetView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0436F87725413EC500284521 /* ReportSheetView.swift */; };
 		0498B247253AA39900179426 /* OrderItemCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0498B246253AA39900179426 /* OrderItemCard.swift */; };
 		04BF36A3253E81FD008053DB /* UpdateStoreData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04BF36A2253E81FD008053DB /* UpdateStoreData.swift */; };
@@ -28,7 +27,6 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		0436F87425413D4800284521 /* AllOrdersReport.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AllOrdersReport.swift; sourceTree = "<group>"; };
 		0436F87725413EC500284521 /* ReportSheetView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReportSheetView.swift; sourceTree = "<group>"; };
 		0498B246253AA39900179426 /* OrderItemCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OrderItemCard.swift; sourceTree = "<group>"; };
 		04BF36A2253E81FD008053DB /* UpdateStoreData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UpdateStoreData.swift; sourceTree = "<group>"; };
@@ -64,7 +62,7 @@
 		0436F86E25413D1700284521 /* ReportScreens */ = {
 			isa = PBXGroup;
 			children = (
-				0436F87425413D4800284521 /* AllOrdersReport.swift */,
+				04BF36A6253E89E0008053DB /* SelectReport.swift */,
 				0436F87725413EC500284521 /* ReportSheetView.swift */,
 			);
 			path = ReportScreens;
@@ -115,7 +113,6 @@
 				CF55AC512540FC62004AE087 /* OrdersScreen */,
 				CF5E04EF253EEEC100130F2A /* HomeScreen */,
 				04BF36A2253E81FD008053DB /* UpdateStoreData.swift */,
-				04BF36A6253E89E0008053DB /* SelectReport.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -231,7 +228,6 @@
 			files = (
 				CF5E04E5253EE8A300130F2A /* HomeViewModel.swift in Sources */,
 				CFF271AC2540F37900C50C9D /* HomeView.swift in Sources */,
-				0436F87525413D4800284521 /* AllOrdersReport.swift in Sources */,
 				CF5E04D8253E5E1900130F2A /* Data.swift in Sources */,
 				CF5E04D5253E5DDB00130F2A /* Order.swift in Sources */,
 				CF5E04D1253E5DA400130F2A /* Ecommerce.swift in Sources */,
