@@ -34,3 +34,6 @@ Eu como usuário gostaria de gerar um relatório dos pedidos por e-commerce, por
 
 
 ## Visão da Implantação
+
+![Deployment Diagram](https://user-images.githubusercontent.com/18580532/97052979-632b0080-1558-11eb-9e04-023d3b707b5a.jpg)
+
