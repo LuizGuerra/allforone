@@ -25,3 +25,8 @@ Eu como usuário gostaria de consultar o status dos pedidos
 Eu como usuário gostaria de gerar um relatório dos pedidos por e-commerce, por data, por agilidade de entrega, por cumprimento de prazo de entrega. 
 
 ## Visão Lógica
+
+![Class Diagram](https://user-images.githubusercontent.com/18580532/97052002-966c9000-1556-11eb-9813-caebad872610.jpg)
+
+
+## Visão da Implantação
